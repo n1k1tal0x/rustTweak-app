@@ -2,6 +2,8 @@
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Shell;
+using Microsoft.Web.WebView2.Core;
+using System.IO;
 
 namespace WpfApp1
 {
@@ -10,12 +12,30 @@ namespace WpfApp1
         public MainWindow()
         {
             InitializeComponent();
+            InitializeAsync();
 
             var chrome = WindowChrome.GetWindowChrome(this);
             if (IsWindows11())
                 chrome.CornerRadius = new CornerRadius(28);
             else
                 chrome.CornerRadius = new CornerRadius(0);
+
+        }
+        private async void InitializeAsync()
+        {
+            await webView.EnsureCoreWebView2Async(null);
+            webView.CoreWebView2.AddHostObjectToScript("csAPI", new JsBridge());
+            string htmlPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "content", "index.html");
+            webView.Source = new Uri(htmlPath);
+        }
+
+        [System.Runtime.InteropServices.ComVisible(true)]
+        public class JsBridge
+        {
+            public void ShowMessage(string msg)
+            {
+                MessageBox.Show(msg);
+            }
         }
 
         private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)

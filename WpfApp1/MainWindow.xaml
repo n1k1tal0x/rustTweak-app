@@ -2,6 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
+        xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
         Title="MainWindow" Height="900" Width="1440"
         WindowStyle="None" Background="#09090D">
 
@@ -12,9 +13,9 @@
         GlassFrameThickness="0" 
         ResizeBorderThickness="5"/>
     </shell:WindowChrome.WindowChrome>
-
+    
     <Grid>
-        <Border Background="#FF2D2D30" Height="30" VerticalAlignment="Top" MouseDown="TitleBar_MouseDown">
+        <Border Background="#09090D" Height="32" VerticalAlignment="Top" MouseDown="TitleBar_MouseDown">
             <Grid>
                 <TextBlock Text="My Custom App" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="White"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
@@ -23,5 +24,6 @@
                 </StackPanel>
             </Grid>
         </Border>
+        <wv2:WebView2 Name="webView" Margin="16,48,16,16"/>
     </Grid>
 </Window>
