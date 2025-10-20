@@ -28,8 +28,21 @@ body, .main {
   justify-content: space-between;
 }
 
+.background-navmenu {
+  display: none;
+}
+
 .navmenu:hover {
   width: 260px;
+  height: 100%;
+  position: absolute;
+  background-color: rgb(17, 17, 21);
+}
+
+.main:has(.navmenu:hover) .background-navmenu {
+  display: flex;
+  width: 104px;
+  /* background-color: aqua; */
 }
 
 .navmenu-link {
@@ -37,15 +50,39 @@ body, .main {
   flex-direction: row;
 }
 
+.navmenu-up {
+  width: 100%;
+  height: 100%;
+}
+
 .navmenu .navmenu-up .navmenu-link a {
-  /* display:none;  */
   opacity: 0;
   transition: opacity 0.3s ease;
+  display:none; 
 }
 
 .navmenu:hover .navmenu-up .navmenu-link a {
-  /* display:flex; */
+  display:flex;
   opacity: 1;
   text-decoration: none;
   color: white;
+}
+
+.navmenu-bottom {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+.main-block {
+  width: 908px;
+  height: 100%;
+  background: rgba(255,255,255,0.03);
+}
+
+.info-block {
+  width: 380px;
+  height: 100%;
+  background: rgba(255,255,255,0.03);
+  border-radius: 12px;
+  overflow: hidden;
 }
