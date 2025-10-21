@@ -30,6 +30,7 @@ body, .main {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  border-radius: 12px;
   /* background-color: red; */
 }
 
@@ -106,12 +107,104 @@ body, .main {
   width: 908px;
   height: 100%;
   background: rgba(255,255,255,0.03);
+  border-radius: 12px;
 }
 
 .info-block {
   width: 380px;
   height: 100%;
-  background: rgba(255,255,255,0.03);
+  background-image: url(./img/trees-0.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: auto 100%;
   border-radius: 12px;
   overflow: hidden;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.info-up-block, .info-bottom-block {
+  width: 100%;
+}
+
+.info-up-block {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.info-bottom-block {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  gap:8px;
+}
+
+@font-face {
+    font-family: 'Geologica Light';
+    src: url('./fonts/Geologica-Light.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Geologica SemiBold';
+    src: url('./fonts/Geologica-SemiBold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.font-geo-light {
+    font-family: 'Geologica Light', sans-serif;
+}
+.font-geo-semibold {
+    font-family: 'Geologica SemiBold', sans-serif;
+}
+
+.font-size-14 {
+    font-size: 14px;
+}
+
+.font-size-16 {
+    font-size: 16px;
+}
+
+.color-white {
+    color: white;
+}
+
+.opacity-60 {
+    opacity: 0.6;
+}
+
+.line-height-110 {
+  line-height: 110%;
+}
+
+.line-height-135 {
+  line-height: 135%;
+}
+
+.reset-btn {
+  width: 62px;
+  height: 48px;
+  border-radius: 12px;
+  background-color: rgba(9,9,13, 0.4);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+}
+
+.access-btn {
+  flex:1;
+  height: 48px;
+  border-radius: 12px;
+  background-color: #E54D2E;
+  border: none;
 }
