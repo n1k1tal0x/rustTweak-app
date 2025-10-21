@@ -138,9 +138,79 @@
                 </script>
             </div>
             <div class="graphics-settings-block">
-                q
+                <div class="graphics-settings-block-slider">
+                    <div class="graphics-settings-block-slider-title">
+                        <span class="color-white opacity-60 font-size-16 font-geo-light">Тени</span>
+                        <span id="settings_status-shadows" class="color-white opacity-60 font-size-16 font-geo-light">Мягкие тени</span>
+                    </div>
+                    <input id="settings_slider-shadows" type="range" min="0" max="4" step="1" value="0" class="graphics-settings-block-slider-slider">
+                </div>
+                <div class="graphics-settings-block-slider">
+                    <div class="graphics-settings-block-slider-title">
+                        <span class="color-white opacity-60 font-size-16 font-geo-light">Текстуры</span>
+                        <span id="settings_status-textures" class="color-white opacity-60 font-size-16 font-geo-light">Мягкие тени</span>
+                    </div>
+                    <input id="settings_slider-textures" type="range" min="0" max="4" step="1" value="0" class="graphics-settings-block-slider-slider">
+                </div>
+                <div class="graphics-settings-block-slider">
+                    <div class="graphics-settings-block-slider-title">
+                        <span class="color-white opacity-60 font-size-16 font-geo-light">Освещение</span>
+                        <span id="settings_status-lighting" class="color-white opacity-60 font-size-16 font-geo-light">Мягкие тени</span>
+                    </div>
+                    <input id="settings_slider-lighting" type="range" min="0" max="4" step="1" value="0" class="graphics-settings-block-slider-slider">
+                </div>
+                <div class="graphics-settings-block-slider">
+                    <div class="graphics-settings-block-slider-title">
+                        <span class="color-white opacity-60 font-size-16 font-geo-light">Деревья</span>
+                        <span id="settings_status-trees" class="color-white opacity-60 font-size-16 font-geo-light">Мягкие тени</span>
+                    </div>
+                    <input id="settings_slider-trees" type="range" min="0" max="4" step="1" value="0" class="graphics-settings-block-slider-slider">
+                </div>
+                <div class="graphics-settings-block-slider">
+                    <div class="graphics-settings-block-slider-title">
+                        <span class="color-white opacity-60 font-size-16 font-geo-light">Трава</span>
+                        <span id="settings_status-grass" class="color-white opacity-60 font-size-16 font-geo-light">Мягкие тени</span>
+                    </div>
+                    <input id="settings_slider-grass" type="range" min="0" max="4" step="1" value="0" class="graphics-settings-block-slider-slider">
+                </div>
+                <div class="graphics-settings-block-slider">
+                    <div class="graphics-settings-block-slider-title">
+                        <span class="color-white opacity-60 font-size-16 font-geo-light">Отражения на воде</span>
+                        <span id="settings_status-reflections_on_the_water" class="color-white opacity-60 font-size-16 font-geo-light">Мягкие тени</span>
+                    </div>
+                    <input id="settings_slider-reflections_on_the_water" type="range" min="0" max="4" step="1" value="0" class="graphics-settings-block-slider-slider">
+                </div>
             </div>
         </div>
+        <script>
+            const slider = document.querySelector('.graphics-settings-block-slider-slider');
+
+            function updateSliderGradient(slider) {
+            const min = slider.min || 0;
+            const max = slider.max || 100;
+            const val = slider.value;
+
+            const percent = ((val - min) / (max - min)) * 100;
+
+            const filledGradient = 'linear-gradient(to right, rgba(229,77,46,0.6) 0%, rgba(229,77,46,1.0) 100%)';
+            const unfilledColor = 'rgba(255,255,255,0.03)';
+
+            // создаём маску с двумя цветами:
+            slider.style.background = `
+                linear-gradient(to right,
+                rgba(229,77,46,0.6) 0%,
+                rgba(229,77,46,1.0) ${percent}%,
+                ${unfilledColor} ${percent}%,
+                ${unfilledColor} 100%)
+            `;
+            }
+
+            // инициализация
+            updateSliderGradient(slider);
+
+            // обновление при изменении
+            slider.addEventListener('input', () => updateSliderGradient(slider));
+        </script>
         <div class="info-block">
             <div class="info-up-block">
                 <span class="font-geo-semibold color-white font-size-16 line-height-110">Деревья</span>

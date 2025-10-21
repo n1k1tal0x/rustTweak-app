@@ -197,6 +197,58 @@ body, .main {
   width: 100%;
   background: rgba(255,255,255,0.03);
   padding: 16px 16px 0px 16px;
+  gap: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.graphics-settings-block-slider {
+  width: 100%;
+  height: 82px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 12px;
+}
+
+.graphics-settings-block-slider-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.graphics-settings-block-slider-slider {
+  width: 100%;
+  height: 18px;
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.03);
+  outline: none;
+  margin: 0;
+}
+
+.graphics-settings-block-slider:hover{
+  background: linear-gradient(to right, 
+    rgba(255, 255, 255, 0.03) 0%,
+    rgba(255, 255, 255, 0.1) 70%,
+    rgba(255, 255, 255, 0.03) 100%
+  );
+}
+
+.graphics-settings-block-slider-slider::-webkit-slider-thumb, .graphics-settings-block-slider-slider::-moz-range-thumb  {
+  -webkit-appearance: none;
+  width: 22px;
+  height: 18px;
+  border-radius: 10px;
+  box-shadow: inset 0 0 0 4px rgba(255, 255,255, 0.8);
+  outline-offset: -4px;
+  border: none;
+  border-color: rgba(255, 255,255, 0.8);
+  background: #E54D2E;
+  cursor: pointer;
 }
 
 .info-block {
