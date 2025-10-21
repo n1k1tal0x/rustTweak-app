@@ -119,7 +119,23 @@
                             </button>
                         </div>
                     </div>
+                    <div class="preset-block-content-tab-bar">
+                        <button class="preset-block-content-tab-bar-btn">Низкие</button>
+                        <button class="preset-block-content-tab-bar-btn">Средние</button>
+                        <button class="preset-block-content-tab-bar-btn">Баланс</button>
+                        <button class="preset-block-content-tab-bar-btn">Ультра</button>
+                    </div>
                 </div>
+                <script>
+                const buttons = document.querySelectorAll('.preset-block-content-tab-bar .preset-block-content-tab-bar-btn');
+
+                buttons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    buttons.forEach(b => b.classList.remove('preset-block-content-tab-bar-btn-active'));
+                    btn.classList.add('preset-block-content-tab-bar-btn-active');
+                });
+                });
+                </script>
             </div>
             <div class="graphics-settings-block">
                 q
