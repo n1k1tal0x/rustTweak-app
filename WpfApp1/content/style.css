@@ -200,11 +200,40 @@ body, .main {
   gap: 12px;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
+}
+
+/* скрываем scrollbar во всех браузерах */
+
+/* Chrome, Edge, Safari */
+.scroll-box::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+/* Firefox */
+.scroll-box {
+  scrollbar-width: none; /* полностью скрывает полосу */
+}
+
+/* IE, старые Edge */
+.scroll-box {
+  -ms-overflow-style: none; /* скрывает в IE/Edge */
 }
 
 .graphics-settings-block-slider {
   width: 100%;
   height: 82px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 12px;
+}
+
+.graphics-settings-block-slider-checkbox {
+  width: 100%;
+  height: 52px;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -230,7 +259,7 @@ body, .main {
   margin: 0;
 }
 
-.graphics-settings-block-slider:hover{
+.graphics-settings-block-slider:hover, .graphics-settings-block-slider-checkbox:hover{
   background: linear-gradient(to right, 
     rgba(255, 255, 255, 0.03) 0%,
     rgba(255, 255, 255, 0.1) 70%,
@@ -352,4 +381,60 @@ body, .main {
   border-radius: 12px;
   background-color: #E54D2E;
   border: none;
+}
+
+/* контейнер */
+.switch {
+  --w: 44px;
+  --h: 24px;
+  display: inline-block;
+}
+
+/* скрываем дефолтный чекбокс, но оставляем доступным для клавиатуры */
+.switch input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* трек */
+.switch .track {
+  display: inline-block;
+  width: var(--w);
+  height: var(--h);
+  background: #ddd;
+  border-radius: calc(var(--h) / 2);
+  position: relative;
+  transition: background .18s ease;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.06);
+}
+
+/* бегунок */
+.switch .track::after{
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  width: calc(var(--h) - 4px);
+  height: calc(var(--h) - 4px);
+  background: white;
+  border-radius: 50%;
+  transition: transform .18s cubic-bezier(.2,.9,.3,1), box-shadow .18s;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+/* состояние checked */
+.switch input:checked + .track {
+  background: linear-gradient(90deg, rgba(229,77,46,0.9), rgba(229,77,46,1));
+}
+
+.switch input:checked + .track::after {
+  transform: translateX(calc(var(--w) - var(--h)));
+  box-shadow: 0 2px 6px rgba(229,77,46,0.25);
+}
+
+/* фокус для клавиатуры */
+.switch input:focus + .track {
+  box-shadow: 0 0 0 4px rgba(34,136,255,0.12), inset 0 0 0 1px rgba(0,0,0,0.06);
 }

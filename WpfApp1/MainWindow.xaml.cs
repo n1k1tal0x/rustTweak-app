@@ -49,11 +49,11 @@ namespace WpfApp1
                 this.DragMove();
         }
 
-        private bool IsWindows11()
-        {
-            Version v = Environment.OSVersion.Version;
-            return v.Major == 10 && v.Build >= 22000;
-        }
+        //private bool IsWindows11()
+        //{
+        //    Version v = Environment.OSVersion.Version;
+        //    return v.Major == 10 && v.Build >= 22000;
+        //}
 
         private void Close_Click(object sender, RoutedEventArgs e) {this.Close();}
 
