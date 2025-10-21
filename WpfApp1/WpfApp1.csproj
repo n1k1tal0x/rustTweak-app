@@ -40,9 +40,6 @@
     <Content Include="content\index.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="content\nav-menu.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="content\style.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
