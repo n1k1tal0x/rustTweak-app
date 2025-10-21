@@ -4,18 +4,24 @@
         xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
         xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
         Title="MainWindow" Height="900" Width="1440"
-        WindowStyle="None" Background="#09090D">
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent">
 
-    <shell:WindowChrome.WindowChrome>
+    <!--<shell:WindowChrome.WindowChrome>
         <shell:WindowChrome 
         CaptionHeight="0" 
         CornerRadius="0" 
         GlassFrameThickness="0" 
         ResizeBorderThickness="5"/>
-    </shell:WindowChrome.WindowChrome>
-    
-    <Grid>
-        <Border Background="#09090D" Height="32" VerticalAlignment="Top" MouseDown="TitleBar_MouseDown">
+    </shell:WindowChrome.WindowChrome> -->
+
+    <Border Background="#09090D"
+            CornerRadius="28"
+            BorderBrush="#09090D"
+            BorderThickness="1"
+            SnapsToDevicePixels="True" ClipToBounds="True">
+        <Grid  ClipToBounds="True" >
+            
+        <Border Height="32" VerticalAlignment="Top" MouseDown="TitleBar_MouseDown">
             <Grid>
                 <TextBlock Text="My Custom App" VerticalAlignment="Center" Margin="10,0,0,0" Foreground="White"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
@@ -26,4 +32,5 @@
         </Border>
         <wv2:WebView2 Name="webView" Margin="16,48,16,16"/>
     </Grid>
+    </Border>
 </Window>

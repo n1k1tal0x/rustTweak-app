@@ -14,17 +14,22 @@ namespace WpfApp1
             InitializeComponent();
             InitializeAsync();
 
-            var chrome = WindowChrome.GetWindowChrome(this);
-            if (IsWindows11())
-                chrome.CornerRadius = new CornerRadius(28);
-            else
-                chrome.CornerRadius = new CornerRadius(0);
+            //var chrome = WindowChrome.GetWindowChrome(this);
+            //if (IsWindows11())
+            //    chrome.CornerRadius = new CornerRadius(28);
+            //else
+            //    chrome.CornerRadius = new CornerRadius(0);
 
         }
         private async void InitializeAsync()
         {
             await webView.EnsureCoreWebView2Async(null);
             webView.CoreWebView2.AddHostObjectToScript("csAPI", new JsBridge());
+            webView.CoreWebView2.WebMessageReceived += (sender, e) =>
+            {
+                string msg = e.TryGetWebMessageAsString();
+                MessageBox.Show(msg);
+            };
             string htmlPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "content", "index.html");
             webView.Source = new Uri(htmlPath);
         }

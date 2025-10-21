@@ -6,6 +6,12 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <script>
+        function sayHello() {
+            <!-- alert(123); -->
+            window.chrome.webview.postMessage("sayHello");
+        }
+    </script>
     <div class="main">
         <div class="background-navmenu"></div>
         <nav class="navmenu">
@@ -118,7 +124,7 @@ q
                         </defs>
                     </svg>
                 </button>
-                <button class="access-btn">
+                <button class="access-btn" onclick="sayHello()">
                     <span class="font-size-14 font-geo-semibold color-white">Применить</span>
                 </button>
             </div>
