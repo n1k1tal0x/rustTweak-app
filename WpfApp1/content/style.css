@@ -69,13 +69,13 @@ body, .main {
   gap: 10px;
 }
 
-.navmenu .navmenu-up .navmenu-link a {
+.navmenu .navmenu-up .navmenu-link a, .navmenu .navmenu-bottom .settings-block a {
   opacity: 0;
   transition: opacity 0.3s ease;
   display:none; 
 }
 
-.navmenu:hover .navmenu-up .navmenu-link a {
+.navmenu:hover .navmenu-up .navmenu-link a, .navmenu:hover .navmenu-bottom .settings-block a {
   display:flex;
   opacity: 1;
   text-decoration: none;
@@ -85,11 +85,21 @@ body, .main {
 .navmenu-bottom {
   width: 100%;
   aspect-ratio: 1 / 1;
+  padding: 20px;
 }
 
 .navmenu:hover .navmenu-bottom {
   aspect-ratio: auto;
   height: auto;
+}
+
+.settings-block {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
 }
 
 .main-block {
