@@ -43,6 +43,7 @@ body, .main {
   height: 100%;
   position: absolute;
   background-color: rgb(17, 17, 21);
+  z-index: 1;
 }
 
 .main:has(.navmenu:hover) .background-navmenu {
