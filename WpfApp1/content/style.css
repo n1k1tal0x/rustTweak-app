@@ -68,7 +68,7 @@ body, .main {
   width: 260px;
   height: 100%;
   position: absolute;
-  z-index: 2;
+  z-index: 100;
   align-items: center;
 }
 
