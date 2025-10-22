@@ -260,13 +260,13 @@ body, .main {
   margin: 0;
 }
 
-.graphics-settings-block-slider:hover, .graphics-settings-block-slider-checkbox:hover{
-  background: linear-gradient(to right, 
+/* .graphics-settings-block-slider:hover, .graphics-settings-block-slider-checkbox:hover{ */
+  /* background: linear-gradient(to right, 
     rgba(255, 255, 255, 0.03) 0%,
     rgba(255, 255, 255, 0.1) 70%,
     rgba(255, 255, 255, 0.03) 100%
-  );
-}
+  ); */
+/* } */
 
 .graphics-settings-block-slider-slider::-webkit-slider-thumb, .graphics-settings-block-slider-slider::-moz-range-thumb  {
   -webkit-appearance: none;
