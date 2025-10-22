@@ -242,24 +242,12 @@ body:has(.navmenu:hover) .background-navmenu {
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
-/* скрываем scrollbar во всех браузерах */
-
-/* Chrome, Edge, Safari */
-.scroll-box::-webkit-scrollbar {
-  width: 0;
-  height: 0;
-}
-
-/* Firefox */
-.scroll-box {
-  scrollbar-width: none; /* полностью скрывает полосу */
-}
-
-/* IE, старые Edge */
-.scroll-box {
-  -ms-overflow-style: none; /* скрывает в IE/Edge */
+.graphics-settings-block::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
 .graphics-settings-block-slider {
