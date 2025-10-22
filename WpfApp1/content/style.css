@@ -39,6 +39,14 @@ body, .main {
   /* background-color: red; */
 }
 
+.navmenu-svg-container {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .background-navmenu {
   /* всегда рендерим, но скрываем */
   display: flex;
@@ -58,6 +66,14 @@ body, .main {
   height: 100%;
   position: absolute;
   z-index: 2;
+  align-items: center;
+}
+
+.navmenu:hover .navmenu-link {
+  width: 220px;
+  justify-content: start;
+  gap:4px;
+  border-radius: 12px;
 }
 
 body:has(.navmenu:hover) .background-navmenu {
@@ -87,14 +103,17 @@ body:has(.navmenu:hover) .background-navmenu {
 }
 
 .navmenu .navmenu-up .navmenu-link a, .navmenu .navmenu-bottom .settings-block a {
+  display:flex;
+  visibility: hidden;
   opacity: 0;
   transition: opacity 0.3s ease;
   display:none; 
 }
 
 .navmenu:hover .navmenu-up .navmenu-link a, .navmenu:hover .navmenu-bottom .settings-block a {
-  display:flex;
-  opacity: 1;
+  display: flex;
+  visibility: visible;
+  opacity: 0.6;
   text-decoration: none;
   color: white;
 }
@@ -115,8 +134,14 @@ body:has(.navmenu:hover) .background-navmenu {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
+  width: 100%;
+  border-radius: 12px;
+}
+
+.navmenu:hover .settings-block {
+  width: 100%;
+  justify-content: start;
+  transition: opacity 0.3s ease;
 }
 
 .main-block {
