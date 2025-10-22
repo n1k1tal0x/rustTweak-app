@@ -169,7 +169,7 @@
                         <span class="color-white opacity-60 font-size-16 font-geo-light">Освещение</span>
                         <span id="settings_status-lighting" class="color-white opacity-60 font-size-16 font-geo-light">Мягкие тени</span>
                     </div>
-                    <input id="settings_slider-lighting" type="range" min="0" max="4" step="1" value="0" class="graphics-settings-block-slider-slider">
+                    <input id="settings_slider-lighting" type="range" min="0" max="3" step="1" value="0" class="graphics-settings-block-slider-slider">
                 </div>
                 <div class="graphics-settings-block-slider">
                     <div class="graphics-settings-block-slider-title">
@@ -213,33 +213,69 @@
             </div>
         </div>
         <script>
-            const slider = document.querySelector('.graphics-settings-block-slider-slider');
+            // per-slider status label maps (keyed by suffix after "settings_slider-")
+            const sliderStatusMap = {
+                shadows: ['Выключено','Низкие','Средние','Высокие','Ультра'],
+                textures: ['Низкие','Средние','Высокие','Ультра','Макс'],
+                lighting: ['Откл','Низкие','Средние','Высокие'],
+                trees: ['Очень низко','Низко','Средне','Высоко','Макс'],
+                grass: ['Выкл','Низко','Средне','Высоко','Макс'],
+                reflections_on_the_water: ['Выкл','Низко','Средне','Высоко','Макс']
+            };
 
-            function updateSliderGradient(slider) {
-            const min = slider.min || 0;
-            const max = slider.max || 100;
-            const val = slider.value;
+            // initialize all range sliders so each updates its own background gradient
+            // and updates the matching status text element with id: settings_status-<suffix>
+            document.querySelectorAll('.graphics-settings-block-slider-slider').forEach(slider => {
+                function updateSliderGradient(s) {
+                    const min = Number(s.min) || 0;
+                    const max = Number(s.max) || 0;
+                    const val = Number(s.value || 0);
+                    const range = (max - min) || 1;
+                    const percent = ((val - min) / range) * 100;
+                    const unfilledColor = 'rgba(255,255,255,0.03)';
 
-            const percent = ((val - min) / (max - min)) * 100;
+                    s.style.background = `linear-gradient(to right, rgba(229,77,46,0.6) 0%, rgba(229,77,46,1.0) ${percent}%, ${unfilledColor} ${percent}%, ${unfilledColor} 100%)`;
+                }
 
-            const filledGradient = 'linear-gradient(to right, rgba(229,77,46,0.6) 0%, rgba(229,77,46,1.0) 100%)';
-            const unfilledColor = 'rgba(255,255,255,0.03)';
+                function updateSliderStatus(s) {
+                    if (!s.id) return;
+                    const prefix = 'settings_slider-';
+                    if (!s.id.startsWith(prefix)) return;
+                    const suffix = s.id.slice(prefix.length);
+                    if (!suffix) return;
+                    const statusEl = document.getElementById('settings_status-' + suffix);
+                    if (!statusEl) return;
 
-            // создаём маску с двумя цветами:
-            slider.style.background = `
-                linear-gradient(to right,
-                rgba(229,77,46,0.6) 0%,
-                rgba(229,77,46,1.0) ${percent}%,
-                ${unfilledColor} ${percent}%,
-                ${unfilledColor} 100%)
-            `;
-            }
+                    const min = Number(s.min) || 0;
+                    const max = Number(s.max) || 0;
+                    const val = Number(s.value || 0);
+                    const steps = Math.max(1, max - min + 1);
 
-            // инициализация
-            updateSliderGradient(slider);
+                    const map = sliderStatusMap[suffix];
+                    if (Array.isArray(map) && map.length > 0) {
+                        // if map length equals steps, use direct index; otherwise scale value into map range
+                        let idx;
+                        if (map.length === steps) idx = val - min;
+                        else idx = Math.round((val - min) / Math.max(1, steps - 1) * (map.length - 1));
+                        idx = Math.min(Math.max(0, idx), map.length - 1);
+                        statusEl.textContent = map[idx];
+                        return;
+                    }
 
-            // обновление при изменении
-            slider.addEventListener('input', () => updateSliderGradient(slider));
+                    // fallback: show numeric value
+                    statusEl.textContent = String(val);
+                }
+
+                // init
+                updateSliderGradient(slider);
+                updateSliderStatus(slider);
+
+                // update on input
+                slider.addEventListener('input', () => {
+                    updateSliderGradient(slider);
+                    updateSliderStatus(slider);
+                });
+            });
         </script>
        <script>
         document.querySelectorAll('.graphics-settings-block-slider, .graphics-settings-block-slider-checkbox, .preset-block-content-tab-bar, .navmenu-link, .settings-block').forEach(el => {
