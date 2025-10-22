@@ -105,7 +105,6 @@ body:has(.navmenu:hover) .background-navmenu {
 .navmenu .navmenu-up .navmenu-link a, .navmenu .navmenu-bottom .settings-block a {
   display:flex;
   visibility: hidden;
-  opacity: 0;
   transition: opacity 0.3s ease;
   display:none; 
 }
@@ -113,7 +112,7 @@ body:has(.navmenu:hover) .background-navmenu {
 .navmenu:hover .navmenu-up .navmenu-link a, .navmenu:hover .navmenu-bottom .settings-block a {
   display: flex;
   visibility: visible;
-  opacity: 0.6;
+  /* opacity: 0.8; */
   text-decoration: none;
   color: white;
 }
@@ -390,6 +389,10 @@ body:has(.navmenu:hover) .background-navmenu {
 
 .opacity-60 {
     opacity: 0.6;
+}
+
+.opacity-100 {
+    opacity: 1.0;
 }
 
 .line-height-110 {
