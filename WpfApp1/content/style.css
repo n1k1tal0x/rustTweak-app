@@ -48,19 +48,18 @@ body, .main {
 }
 
 .background-navmenu {
-  /* всегда рендерим, но скрываем */
-  display: flex;
-  width: 100%;
-  height: 100%;
-  position: absolute;
+  /* overlay sits as a full-screen sibling and never steals pointer events */
+  display: block;
+  position: fixed;
+  inset: 0; /* top:0; right:0; bottom:0; left:0 */
   z-index: 50;
-  /* background-color: #09090D; */
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
-  /* opacity: 0;                      0..1 */
-  background-color: rgba(9, 9, 13, 0.35);
-  visibility: hidden;              /* чтобы не ловил клики */
-  pointer-events: none;
+  /* slightly darker and more opaque to make blur look uniform */
+  background-color: rgba(9, 9, 13, 0.55);
+  opacity: 0;
+  visibility: hidden; /* keep out of flow and hide until nav hovered */
+  pointer-events: none; /* do not capture hover */
   transition: opacity 0.28s ease, visibility 0s linear 0.28s;
 }
 
@@ -79,10 +78,11 @@ body, .main {
   border-radius: 12px;
 }
 
-body:has(.navmenu:hover) .background-navmenu {
-  opacity: 0.8;                    /* правильный диапазон */
+/* Use sibling selector: when nav is hovered, show the overlay */
+.navmenu:hover ~ .background-navmenu {
+  opacity: 1; /* fully visible so blur looks continuous */
   visibility: visible;
-  pointer-events: auto;
+  pointer-events: none; /* still don't capture pointer events */
   transition: opacity 0.28s ease, visibility 0s linear 0s;
 }
 
