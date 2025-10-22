@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Microsoft.Web.WebView2.Core;
+using System;
+using System.IO;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Shell;
-using Microsoft.Web.WebView2.Core;
-using System.IO;
 
 namespace WpfApp1
 {
@@ -42,18 +43,30 @@ namespace WpfApp1
                 MessageBox.Show(msg);
             }
         }
-
+        private void InDev(object sender, RoutedEventArgs e) { MessageBox.Show("InDev!"); }
         private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.ChangedButton == MouseButton.Left)
+            // Игнорируем клики по кнопкам внутри
+            if (e.Source is Button) return;
+
+            try
+            {
+                // Одинарный клик — перемещение окна
                 this.DragMove();
+            }
+            catch (InvalidOperationException)
+            {
+                // Иногда DragMove выбрасывает исключение, если мышь не над окном — просто игнорируем
+            }
         }
 
-        //private bool IsWindows11()
-        //{
-        //    Version v = Environment.OSVersion.Version;
-        //    return v.Major == 10 && v.Build >= 22000;
-        //}
+        private void Fullsize_Click(object sender, RoutedEventArgs e)
+        {
+            if (WindowState == WindowState.Normal)
+                WindowState = WindowState.Maximized;
+            else if (WindowState == WindowState.Maximized)
+                WindowState = WindowState.Normal;
+        }
 
         private void Close_Click(object sender, RoutedEventArgs e) {this.Close();}
 
