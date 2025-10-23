@@ -139,14 +139,23 @@
                     </div>
                 </div>
                 <script>
+                                // ...existing code...
                 const buttons = document.querySelectorAll('.preset-block-content-tab-bar .preset-block-content-tab-bar-btn');
-
+                
                 buttons.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    buttons.forEach(b => b.classList.remove('preset-block-content-tab-bar-btn-active'));
+                  btn.addEventListener('click', () => {
+                    // убрать active у всех и очистить inline background (устраняет оставшийся hover-градиент)
+                    buttons.forEach(b => {
+                      b.classList.remove('preset-block-content-tab-bar-btn-active');
+                      b.style.background = '';
+                    });
+                
+                    // добавить active к нажатой и убедиться, что inline background очищен
                     btn.classList.add('preset-block-content-tab-bar-btn-active');
+                    btn.style.background = '';
+                  });
                 });
-                });
+                // ...existing code...
                 </script>
             </div>
             <div class="graphics-settings-block">

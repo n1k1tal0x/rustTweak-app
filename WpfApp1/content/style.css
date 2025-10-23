@@ -22,6 +22,7 @@ body, .main {
 
 * {
   box-sizing: border-box;
+  overscroll-behavior: none;
 }
 
 .navmenu {
@@ -58,6 +59,7 @@ body, .main {
   /* slightly darker and more opaque to make blur look uniform */
   background-color: rgba(9, 9, 13, 0.55);
   opacity: 0;
+  border-radius: 12px;
   visibility: hidden; /* keep out of flow and hide until nav hovered */
   pointer-events: none; /* do not capture hover */
   transition: opacity 0.28s ease, visibility 0s linear 0.28s;
@@ -224,10 +226,12 @@ body, .main {
   font-size: 16px;
 }
 
-/* .preset-block-content-tab-bar-btn:not(.preset-block-content-tab-bar-btn-active):hover {
-   background-color: rgba(255, 255, 255, 0.03);
-}  */
+/* hover только для неактивной кнопки */
+.preset-block-content-tab-bar-btn:not(.preset-block-content-tab-bar-btn-active):hover {
+  background-color: rgba(255, 255, 255, 0.03);
+}
 
+/* активная кнопка должна перекрывать hover */
 .preset-block-content-tab-bar-btn-active {
   background-color: rgba(229, 77, 46, 1);
 }
