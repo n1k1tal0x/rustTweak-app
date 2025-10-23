@@ -147,7 +147,8 @@ body, .main {
 }
 
 .main-block {
-  width: 908px;
+  /* width: 908px; */
+  flex: 1;
   height: 100%;
   overflow: hidden;
   /* background: rgba(255,255,255,0.03); */
@@ -203,11 +204,7 @@ body, .main {
 .preset-block-content-tab-bar {
   width: 100%;
   height: 56px;
-  background: linear-gradient(to right, 
-    rgba(255, 255, 255, 0.03) 0%,
-    rgba(255, 255, 255, 0.1) 70%,
-    rgba(255, 255, 255, 0.03) 100%
-  );
+  background: rgba(255, 255,255,0.03);
   border-radius: 12px;
   display: flex;
   flex-direction: row;
@@ -227,9 +224,9 @@ body, .main {
   font-size: 16px;
 }
 
-.preset-block-content-tab-bar-btn:not(.preset-block-content-tab-bar-btn-active):hover {
+/* .preset-block-content-tab-bar-btn:not(.preset-block-content-tab-bar-btn-active):hover {
    background-color: rgba(255, 255, 255, 0.03);
-}
+}  */
 
 .preset-block-content-tab-bar-btn-active {
   background-color: rgba(229, 77, 46, 1);
