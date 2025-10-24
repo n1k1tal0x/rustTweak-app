@@ -114,10 +114,33 @@ body, .main {
   display:none; 
 }
 
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+@keyframes expandWidth {
+    0% {
+        width: 0;
+        opacity: 0;
+    }
+    100% {
+        width: 100%;
+        opacity: 1;
+    }
+}
+
 .navmenu:hover .navmenu-up .navmenu-link a, .navmenu:hover .navmenu-bottom .settings-block a {
-  display: flex;
+  display: block;
   visibility: visible;
   /* opacity: 0.8; */
+  /* animation: slideIn 1s forwards; */
+  animation: expandWidth 1s forwards;
   text-decoration: none;
   color: white;
 }
