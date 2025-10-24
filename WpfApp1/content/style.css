@@ -27,7 +27,7 @@ body, .main {
 
 .navmenu {
   width: 88px;
-  transition: width 0.28s ease;
+  transition: width 0.6s ease;
   /* background: rgba(255,255,255,0.03); */
   background-color: rgb(17, 17, 21);
   display: flex;
@@ -62,7 +62,8 @@ body, .main {
   border-radius: 12px;
   visibility: hidden; /* keep out of flow and hide until nav hovered */
   pointer-events: none; /* do not capture hover */
-  transition: opacity 0.28s ease, visibility 0s linear 0.28s;
+  /* transition: opacity 0.28s ease, visibility 0s linear 0.28s; */
+  transition: opacity 0.6s ease, visibility 0s linear 0s;
 }
 
 .navmenu:hover {
@@ -74,8 +75,9 @@ body, .main {
 }
 
 .navmenu:hover .navmenu-link {
-  width: 220px;
-  justify-content: start;
+  /* width: 220px; */
+  width: 100%;
+  justify-content: center;
   gap:4px;
   border-radius: 12px;
 }
@@ -85,7 +87,8 @@ body, .main {
   opacity: 1; /* fully visible so blur looks continuous */
   visibility: visible;
   pointer-events: none; /* still don't capture pointer events */
-  transition: opacity 0.28s ease, visibility 0s linear 0s;
+  transition: opacity 0.6s ease, visibility 0s linear 0s;
+  /* transition: opacity 0.28s ease 0.1s, visibility 0s linear 0s; */
 }
 
 .navmenu-link {
@@ -93,7 +96,8 @@ body, .main {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  width: 48px;
+  /* width: 48px; */
+  width: 100%;
   height: 48px;
 }
 
@@ -107,11 +111,35 @@ body, .main {
   gap: 10px;
 }
 
-.navmenu .navmenu-up .navmenu-link a, .navmenu .navmenu-bottom .settings-block a {
-  display:flex;
+.navmenu .navmenu-up .navmenu-link a,
+.navmenu .navmenu-bottom .settings-block a {
+  /* остаёмся в DOM, но сворачиваем и прячем */
+  display: block;
+  width: 0;
+  opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s ease;
-  display:none; 
+  overflow: hidden;
+  white-space: nowrap;
+  pointer-events: none;
+  transform: translateX(-10px);
+
+  /* плавное появление/скрытие + visibility скрывается с задержкой */
+  transition: width 0.6s ease, opacity 0.6s ease, transform 0.6s ease, visibility 0s linear 0.6s;
+  text-decoration: none;
+  color: white;
+}
+
+/* при hover показываем — transitions обеспечат обратную анимацию при уходе */
+.navmenu:hover .navmenu-up .navmenu-link a,
+.navmenu:hover .navmenu-bottom .settings-block a {
+  width: 0px;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(0);
+
+  /* visibility без задержки при появлении */
+  transition: width 0.6s ease, opacity 0.6s ease, transform 0.6s ease, visibility 0s linear 0s;
 }
 
 @keyframes slideIn {
@@ -136,18 +164,14 @@ body, .main {
 }
 
 .navmenu:hover .navmenu-up .navmenu-link a, .navmenu:hover .navmenu-bottom .settings-block a {
-  display: block;
-  visibility: visible;
-  /* opacity: 0.8; */
-  /* animation: slideIn 1s forwards; */
-  animation: expandWidth 1s forwards;
+  animation: expandWidth 0.6s forwards;
   text-decoration: none;
   color: white;
 }
 
 .navmenu-bottom {
   width: 100%;
-  aspect-ratio: 1 / 1;
+  /* aspect-rati  o: 1 / 1; */
   padding: 20px;
 }
 
@@ -168,7 +192,7 @@ body, .main {
 .navmenu:hover .settings-block {
   width: 100%;
   justify-content: start;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.6s ease;
 }
 
 .main-block {
