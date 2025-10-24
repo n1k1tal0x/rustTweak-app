@@ -580,3 +580,13 @@ body, .main {
   /* box-shadow: 0 0 0 4px rgba(34,136,255,0.12), inset 0 0 0 1px rgba(0,0,0,0.06); */
   
 /* } */
+
+.graphics-settings-block-slider,
+.graphics-settings-block-slider-checkbox,
+.navmenu-link,
+.settings-block,
+.preset-block-content-tab-bar-btn {
+  transition: background 420ms cubic-bezier(.2,.8,.2,1), backdrop-filter 420ms cubic-bezier(.2,.8,.2,1), -webkit-backdrop-filter 420ms cubic-bezier(.2,.8,.2,1);
+  will-change: background, backdrop-filter;
+  -webkit-backface-visibility: hidden;
+}
