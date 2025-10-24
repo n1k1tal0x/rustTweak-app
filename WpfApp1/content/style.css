@@ -95,7 +95,6 @@ body, .main {
   width: 100%;
   /* flex: 1; */
   justify-content: start;
-  gap:4px;
   border-radius: 12px;
 }
 
