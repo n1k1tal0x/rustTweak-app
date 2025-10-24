@@ -287,48 +287,44 @@
             });
         </script>
        <script>
-        document.querySelectorAll('.graphics-settings-block-slider, .graphics-settings-block-slider-checkbox, .navmenu-link, .settings-block, .preset-block-content-tab-bar-btn').forEach(el => {
-            el.style.transition = el.style.transition || 'background 420ms cubic-bezier(.2,.8,.2,1), backdrop-filter 420ms cubic-bezier(.2,.8,.2,1), -webkit-backdrop-filter 420ms cubic-bezier(.2,.8,.2,1)';
-            el.style.willChange = el.style.willChange || 'background, backdrop-filter';
+        document.querySelectorAll('.graphics-settings-block-slider, .graphics-settings-block-slider-checkbox, .navmenu-link, .settings-block, .preset-block-content-tab-bar-btn')
+        .forEach(el => {
+            el.classList.add('animated-gradient');
 
-            let last = { x: 0, y: 0, active: false };
+            if (['preset-block-content-tab-bar-btn-active'].some(cls => el.classList.contains(cls))) { return; }
             let ticking = false;
-            const computedBase = Math.max(el.clientWidth, el.clientHeight);
-            const radius = Math.max(1600, Math.min(4200, Math.round(computedBase * 1.2)));
+            let last = { x: 0, y: 0, active: false };
 
-            function updateBackground() {
+            function updateGradient() {
                 if (!last.active) { ticking = false; return; }
-                const x = last.x;
-                const y = last.y;
-                const r = radius;
-                el.style.background = `radial-gradient(circle at ${x}px ${y}px, 
-                    rgba(255,255,255,0.144) 0px, 
-                    rgba(255,255,255,0.07) ${Math.round(r * 0.08)}px, 
-                    rgba(255,255,255,0.05) ${Math.round(r * 0.35)}px, 
-                    rgba(255,255,255,0.02) ${Math.round(r * 0.75)}px, 
-                    rgba(255,255,255,0.0) ${Math.round(r * 1.2)}px)`;
-                el.style.backdropFilter = 'blur(10px)';
-                el.style.webkitBackdropFilter = 'blur(10px)';
+
+                // Обновляем CSS-переменные центра градиента
+                el.style.setProperty('--gradient-x', `${last.x}px`);
+                el.style.setProperty('--gradient-y', `${last.y}px`);
+
+                // Заставляем браузер "перерисовать" градиент
+                el.style.setProperty('--_force-redraw', Math.random());
+
                 ticking = false;
             }
 
             el.addEventListener('mousemove', e => {
-                if (el.classList.contains('preset-block-content-tab-bar-btn-active')) { return; }
                 const rect = el.getBoundingClientRect();
-                last.x = Math.max(0, Math.min(rect.width, e.clientX - rect.left));
-                last.y = Math.max(0, Math.min(rect.height, e.clientY - rect.top));
+                last.x = e.clientX - rect.left;
+                last.y = e.clientY - rect.top;
                 last.active = true;
+
+                el.classList.add('gradient-visible');
+
                 if (!ticking) {
                     ticking = true;
-                    requestAnimationFrame(updateBackground);
+                    requestAnimationFrame(updateGradient);
                 }
             });
 
             el.addEventListener('mouseleave', () => {
                 last.active = false;
-                el.style.background = '';
-                el.style.backdropFilter = '';
-                el.style.webkitBackdropFilter = '';
+                el.classList.remove('gradient-visible');
             });
         });
         </script>

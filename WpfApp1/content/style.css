@@ -162,6 +162,52 @@ body, .main {
   }
 }
 
+@keyframes opacityAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.animated-gradient {
+  position: relative; /* обязательно */
+  overflow: hidden;
+}
+
+.animated-gradient::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0; /* градиент под всеми детьми */
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 420ms cubic-bezier(.2,.8,.2,1);
+  will-change: opacity, background;
+
+  background: radial-gradient(
+    circle at var(--gradient-x) var(--gradient-y),
+    rgba(255, 255, 255, 0.144) 0px,
+    rgba(255, 255, 255, 0.07) 80px,
+    rgba(255, 255, 255, 0.05) 200px,
+    rgba(255, 255, 255, 0.02) 400px,
+    rgba(255, 255, 255, 0.0) 800px
+  );
+  backdrop-filter: blur(10px);
+}
+
+.animated-gradient.gradient-visible::before {
+  opacity: 1;
+}
+
+/* Все дочерние элементы должны быть выше градиента */
+.animated-gradient > * {
+  position: relative;
+  z-index: 1;
+}
+
+
 .navmenu:hover .navmenu-up .navmenu-link a, .navmenu:hover .navmenu-bottom .settings-block a {
   animation: expandWidth 0.48s forwards;
   text-decoration: none;
