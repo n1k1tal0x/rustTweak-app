@@ -46,7 +46,6 @@
         </Style>
     </Window.Resources>
 
-
     <Border Background="#09090D"
             CornerRadius="28"
             BorderBrush="#09090D"
@@ -74,29 +73,14 @@
                         <Button Width="42" Height="32" Click="InDev" BorderThickness="0" Background="#111115" Margin="0,0,16,0" Style="{StaticResource ButtonHoverStyle}">
                             <Image Source="Assets/faq.png" Width="16" Height="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         </Button>
-                        <Button Width="42" Height="32" Click="Minimize_Click" BorderThickness="0" Background="#111115" Margin="0,0,4,0">
+                        <Button Width="42" Height="32" Click="Minimize_Click" BorderThickness="0" Background="#111115" Margin="0,0,4,0" Style="{StaticResource ButtonHoverStyle}">
                             <Image Source="Assets/3.png" Width="16" Height="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            <Button.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="12"/>
-                                </Style>
-                            </Button.Resources>
                         </Button>
-                        <Button Width="42" Height="32" Click="Fullsize_Click" BorderThickness="0" Background="#111115" Margin="0,0,4,0">
+                        <Button Width="42" Height="32" Click="Fullsize_Click" BorderThickness="0" Background="#111115" Margin="0,0,4,0" Style="{StaticResource ButtonHoverStyle}">
                             <Image Source="Assets/2.png" Width="16" Height="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            <Button.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="12"/>
-                                </Style>
-                            </Button.Resources>
                         </Button>
-                        <Button Width="42" Height="32" Click="Close_Click" BorderThickness="0" Background="#111115" Margin="0,0,0,0" ForceCursor="False">
+                        <Button Width="42" Height="32" Click="Close_Click" BorderThickness="0" Background="#111115" Margin="0,0,0,0" ForceCursor="False" Style="{StaticResource ButtonHoverStyle}">
                             <Image Source="Assets/1.png" Width="16" Height="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            <Button.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="12"/>
-                                </Style>
-                            </Button.Resources>
                         </Button>
                     </StackPanel>
                 </Grid>
