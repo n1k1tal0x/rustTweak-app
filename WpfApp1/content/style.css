@@ -93,6 +93,7 @@ body, .main {
 
 .navmenu:hover .navmenu-link {
   width: 100%;
+  /* flex: 1; */
   justify-content: start;
   gap:4px;
   border-radius: 12px;
@@ -110,18 +111,19 @@ body, .main {
 
 .navmenu .navmenu-up .navmenu-link a,
 .navmenu .navmenu-bottom .settings-block a {
-  /* остаёмся в DOM, но сворачиваем и прячем */
-  display: block;
-  width: 0;
+  /* stay in DOM but collapsed visually; expand using flex-grow to reach flex:1 */
+  display: flex;
+  /* start collapsed: no growth and zero basis so it takes no space */
+  flex-grow: 0;
+  flex-basis: 0;
+  max-width: 0; /* keep text hidden until expanded */
   opacity: 0;
-  visibility: hidden;
   overflow: hidden;
   white-space: nowrap;
   pointer-events: none;
   transform: translateX(-10px);
-  animation: collapseWidth 0.48s forwards;
-  /* плавное появление/скрытие + visibility скрывается с задержкой */
-  transition: width 0.48s ease, opacity 0.48s ease, transform 0.48s ease, visibility 0s linear 0.48s;
+  /* remove keyframe animation in favor of transitions on flex-grow/max-width/opacity/transform */
+  transition: flex-grow 0.48s cubic-bezier(.2,.8,.2,1), max-width 0.48s cubic-bezier(.2,.8,.2,1), opacity 0.48s ease, transform 0.48s ease, visibility 0s linear 0.48s;
   text-decoration: none;
   color: white;
 }
@@ -129,14 +131,14 @@ body, .main {
 /* при hover показываем — transitions обеспечат обратную анимацию при уходе */
 .navmenu:hover .navmenu-up .navmenu-link a,
 .navmenu:hover .navmenu-bottom .settings-block a {
-  width: 0px;
+  /* expand to flexible space (behaves like flex:1) */
+  flex-grow: 1;
+  /* allow a large max-width so flex can allocate available space; prevents clipping during transition */
+  max-width: 1000px;
   opacity: 1;
-  visibility: visible;
   pointer-events: auto;
   transform: translateX(0);
-
-  /* visibility без задержки при появлении */
-  transition: width 0.48s ease, opacity 0.48s ease, transform 0.48s ease, visibility 0s linear 0s;
+  /* no need to override transition here — initial rule covers it */
 }
 
 @keyframes expandWidth {
@@ -207,7 +209,6 @@ body, .main {
 
 
 .navmenu:hover .navmenu-up .navmenu-link a, .navmenu:hover .navmenu-bottom .settings-block a {
-  animation: expandWidth 0.48s forwards;
   text-decoration: none;
   color: white;
 }
@@ -226,7 +227,7 @@ body, .main {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
   width: 100%;
   border-radius: 12px;
 }
@@ -628,5 +629,6 @@ body, .main {
 .preset-block-content-tab-bar-btn {
   transition: background 420ms cubic-bezier(.2,.8,.2,1), backdrop-filter 420ms cubic-bezier(.2,.8,.2,1), -webkit-backdrop-filter 420ms cubic-bezier(.2,.8,.2,1);
   will-change: background, backdrop-filter;
+  backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
