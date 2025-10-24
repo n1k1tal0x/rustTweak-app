@@ -324,7 +324,7 @@
         .forEach(el => {
             el.classList.add('animated-gradient');
 
-            if (['preset-block-content-tab-bar-btn-active'].some(cls => el.classList.contains(cls))) { return; }
+            if (['preset-block-content-tab-bar-btn-active', 'preset-block-content-tab-bar-btn'].some(cls => el.classList.contains(cls))) { return; }
             let ticking = false;
             let last = { x: 0, y: 0, active: false };
 
