@@ -169,7 +169,7 @@
                         <span class="color-white opacity-60 font-size-16 font-geo-light">Тени</span>
                         <span id="settings_status-shadows" class="color-white opacity-60 font-size-16 font-geo-light">Мягкие тени</span>
                     </div>
-                    <input id="settings_slider-shadows" type="range" min="0" max="4" step="1" value="0" class="graphics-settings-block-slider-slider">
+                    <input id="settings_slider-shadows" type="range" min="0" max="4" step="1" value="1" class="graphics-settings-block-slider-slider">
                 </div>
                 <div class="graphics-settings-block-slider" onmouseover="{
                         document.getElementById('description_text-title').textContent = 'Тfdsfdsfsd';
@@ -180,7 +180,7 @@
                         <span class="color-white opacity-60 font-size-16 font-geo-light">Текстуры</span>
                         <span id="settings_status-textures" class="color-white opacity-60 font-size-16 font-geo-light">Мягкие тени</span>
                     </div>
-                    <input id="settings_slider-textures" type="range" min="0" max="4" step="1" value="0" class="graphics-settings-block-slider-slider">
+                    <input id="settings_slider-textures" type="range" min="0" max="4" step="1" value="3" class="graphics-settings-block-slider-slider">
                 </div>
                 <div class="graphics-settings-block-slider" onmouseover="{
                         document.getElementById('description_text-title').textContent = 'Теhjgdsdни';
@@ -191,7 +191,7 @@
                         <span class="color-white opacity-60 font-size-16 font-geo-light">Освещение</span>
                         <span id="settings_status-lighting" class="color-white opacity-60 font-size-16 font-geo-light">Мягкие тени</span>
                     </div>
-                    <input id="settings_slider-lighting" type="range" min="0" max="3" step="1" value="0" class="graphics-settings-block-slider-slider">
+                    <input id="settings_slider-lighting" type="range" min="0" max="3" step="1" value="1" class="graphics-settings-block-slider-slider">
                 </div>
                 <div class="graphics-settings-block-slider" onmouseover="{
                         document.getElementById('description_text-title').textContent = 'Тенgfgdfdsfsи';
@@ -202,7 +202,7 @@
                         <span class="color-white opacity-60 font-size-16 font-geo-light">Деревья</span>
                         <span id="settings_status-trees" class="color-white opacity-60 font-size-16 font-geo-light">Мягкие тени</span>
                     </div>
-                    <input id="settings_slider-trees" type="range" min="0" max="4" step="1" value="0" class="graphics-settings-block-slider-slider">
+                    <input id="settings_slider-trees" type="range" min="0" max="4" step="1" value="2" class="graphics-settings-block-slider-slider">
                 </div>
                 <div class="graphics-settings-block-slider" onmouseover="{
                         document.getElementById('description_text-title').textContent = 'Теkjhhjghjни';
@@ -213,7 +213,7 @@
                         <span class="color-white opacity-60 font-size-16 font-geo-light">Трава</span>
                         <span id="settings_status-grass" class="color-white opacity-60 font-size-16 font-geo-light">Мягкие тени</span>
                     </div>
-                    <input id="settings_slider-grass" type="range" min="0" max="4" step="1" value="0" class="graphics-settings-block-slider-slider">
+                    <input id="settings_slider-grass" type="range" min="0" max="4" step="1" value="4" class="graphics-settings-block-slider-slider">
                 </div>
                 <div class="graphics-settings-block-slider" onmouseover="{
                         document.getElementById('description_text-title').textContent = 'Тенhjjghjghhnghgи';
@@ -252,21 +252,34 @@
                         </label>
                     </div>
                 </div>
+                <div class="graphics-settings-block-slider" onmouseover="{
+                        document.getElementById('description_text-title').textContent = 'Теkjhhjghjни';
+                        document.getElementById('description_text-full').textContent = 'Про тени какой нибудь текст';
+                        document.getElementById('info-block').style.backgroundColor = 'yellow';
+                    }">
+                    <div class="graphics-settings-block-slider-title">
+                        <span class="color-white opacity-60 font-size-16 font-geo-light">Не пресетные настройки</span>
+                        <span id="settings_status-noPresetSetting" class="color-white opacity-60 font-size-16 font-geo-light">Мягкие тени</span>
+                    </div>
+                    <input id="settings_slider-noPresetSetting" type="range" min="0" max="4" step="1" value="0" class="graphics-settings-block-slider-slider no-preset-slider">
+                </div>
             </div>
         </div>
         <script>
-            // per-slider status label maps (keyed by suffix after "settings_slider-")
             const sliderStatusMap = {
                 shadows: ['Выключено','Низкие','Средние','Высокие','Ультра'],
                 textures: ['Низкие','Средние','Высокие','Ультра','Макс'],
                 lighting: ['Откл','Низкие','Средние','Высокие'],
                 trees: ['Очень низко','Низко','Средне','Высоко','Макс'],
                 grass: ['Выкл','Низко','Средне','Высоко','Макс'],
-                reflections_on_the_water: ['Выкл','Низко','Средне','Высоко','Макс']
+                reflections_on_the_water: ['Выкл','Низко','Средне','Высоко','Макс'],
+                noPresetSetting: ['Настройка 0','Настройка 1','Настройка 2','Настройка 3','Настройка 4'],
             };
 
-            // initialize all range sliders so each updates its own background gradient
-            // and updates the matching status text element with id: settings_status-<suffix>
+            const noInPreset = {
+                noPresetSetting: true,
+            };
+
             document.querySelectorAll('.graphics-settings-block-slider-slider').forEach(slider => {
                 function updateSliderGradient(s) {
                     const min = Number(s.min) || 0;
@@ -293,9 +306,18 @@
                     const val = Number(s.value || 0);
                     const steps = Math.max(1, max - min + 1);
 
+                    if (statusEl.textContent == 'Пользовательская') {
+                        s.classList.remove('no-preset-slider');
+                    }
+
+                    if (suffix in noInPreset && noInPreset[suffix]) {
+                        noInPreset[suffix] = false;
+                        statusEl.textContent = 'Пользовательская';
+                        return;
+                    }
+
                     const map = sliderStatusMap[suffix];
                     if (Array.isArray(map) && map.length > 0) {
-                        // if map length equals steps, use direct index; otherwise scale value into map range
                         let idx;
                         if (map.length === steps) idx = val - min;
                         else idx = Math.round((val - min) / Math.max(1, steps - 1) * (map.length - 1));
@@ -304,15 +326,12 @@
                         return;
                     }
 
-                    // fallback: show numeric value
                     statusEl.textContent = String(val);
                 }
 
-                // init
                 updateSliderGradient(slider);
                 updateSliderStatus(slider);
-
-                // update on input
+                
                 slider.addEventListener('input', () => {
                     updateSliderGradient(slider);
                     updateSliderStatus(slider);
