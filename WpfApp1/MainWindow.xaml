@@ -15,6 +15,38 @@
         ResizeBorderThickness="5"/>
     </shell:WindowChrome.WindowChrome> -->
 
+    <Window.Resources>
+        <Style x:Key="ButtonHoverStyle" TargetType="Button">
+            <Setter Property="Width" Value="42"/>
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="#111115"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="12"
+                            SnapsToDevicePixels="True">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#E54D2E"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#B22609"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+
     <Border Background="#09090D"
             CornerRadius="28"
             BorderBrush="#09090D"
@@ -32,34 +64,15 @@
                     <Border Grid.Column="1" Background="Transparent" MouseDown="TitleBar_MouseDown"/>
 
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button Width="42" Height="32" Click="InDev" BorderThickness="0" Background="#111115" Margin="0,0,4,0">
+                        <Button Width="42" Height="32" Click="InDev" BorderThickness="0" Background="#111115" Margin="0,0,4,0" Cursor="Hand" Style="{StaticResource ButtonHoverStyle}">
                             <Image Source="Assets/yt.png" Width="16" Height="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            <Button.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="12"/>
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="Green"/>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Resources>
                         </Button>
-                        <Button Width="42" Height="32" Click="InDev" BorderThickness="0" Background="#111115" Margin="0,0,4,0">
+
+                        <Button Width="42" Height="32" Click="InDev" BorderThickness="0" Background="#111115" Margin="0,0,4,0" Style="{StaticResource ButtonHoverStyle}">
                             <Image Source="Assets/tg.png" Width="16" Height="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            <Button.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="12"/>
-                                </Style>
-                            </Button.Resources>
                         </Button>
-                        <Button Width="42" Height="32" Click="InDev" BorderThickness="0" Background="#111115" Margin="0,0,16,0">
+                        <Button Width="42" Height="32" Click="InDev" BorderThickness="0" Background="#111115" Margin="0,0,16,0" Style="{StaticResource ButtonHoverStyle}">
                             <Image Source="Assets/faq.png" Width="16" Height="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            <Button.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="12"/>
-                                </Style>
-                            </Button.Resources>
                         </Button>
                         <Button Width="42" Height="32" Click="Minimize_Click" BorderThickness="0" Background="#111115" Margin="0,0,4,0">
                             <Image Source="Assets/3.png" Width="16" Height="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -77,7 +90,7 @@
                                 </Style>
                             </Button.Resources>
                         </Button>
-                        <Button Width="42" Height="32" Click="Close_Click" BorderThickness="0" Background="#111115" Margin="0,0,0,0">
+                        <Button Width="42" Height="32" Click="Close_Click" BorderThickness="0" Background="#111115" Margin="0,0,0,0" ForceCursor="False">
                             <Image Source="Assets/1.png" Width="16" Height="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             <Button.Resources>
                                 <Style TargetType="Border">
