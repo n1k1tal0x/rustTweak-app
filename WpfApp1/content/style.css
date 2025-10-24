@@ -28,7 +28,6 @@ body, .main {
 .navmenu {
   width: 88px;
   transition: width 0.6s ease;
-  /* background: rgba(255,255,255,0.03); */
   background-color: rgb(17, 17, 21);
   display: flex;
   height: 100%;
@@ -37,7 +36,6 @@ body, .main {
   justify-content: space-between;
   border-radius: 12px;
   z-index: 100;
-  /* background-color: red; */
 }
 
 .navmenu-svg-container {
@@ -122,7 +120,7 @@ body, .main {
   white-space: nowrap;
   pointer-events: none;
   transform: translateX(-10px);
-
+  animation: collapseWidth 0.6s forwards;
   /* плавное появление/скрытие + visibility скрывается с задержкой */
   transition: width 0.6s ease, opacity 0.6s ease, transform 0.6s ease, visibility 0s linear 0.6s;
   text-decoration: none;
@@ -142,16 +140,6 @@ body, .main {
   transition: width 0.6s ease, opacity 0.6s ease, transform 0.6s ease, visibility 0s linear 0s;
 }
 
-@keyframes slideIn {
-    0% {
-        opacity: 0;
-        transform: translateX(-50px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
 @keyframes expandWidth {
     0% {
         width: 0;
@@ -161,6 +149,17 @@ body, .main {
         width: 100%;
         opacity: 1;
     }
+}
+
+@keyframes collapseWidth {
+  0% {
+    width: 100%;
+    opacity: 1;
+  }
+  100% {
+    width: 0;
+    opacity: 0;
+  }
 }
 
 .navmenu:hover .navmenu-up .navmenu-link a, .navmenu:hover .navmenu-bottom .settings-block a {
