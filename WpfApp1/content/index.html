@@ -27,7 +27,7 @@
                             </defs>
                         </svg>
                     </div>
-                    <a href="#" class="font-size-16 font-geo-light color-white opacity-60">Твики</a>
+                    <a href="#" class="font-size-16 font-geo-light color-white navmenu-link-opacity">Твики</a>
                 </div>
                 <div class="navmenu-link">
                     <div class="navmenu-svg-container">
@@ -42,7 +42,7 @@
                             </defs>
                         </svg>
                     </div>
-                    <a href="#" class="font-size-16 font-geo-light color-white opacity-60">Оптимизация</a>
+                    <a href="#" class="font-size-16 font-geo-light color-white navmenu-link-opacity">Оптимизация</a>
                 </div>
                 <div class="navmenu-link">
                     <div class="navmenu-svg-container">
@@ -57,7 +57,7 @@
                             </defs>
                         </svg>
                     </div>
-                    <a href="#" class="font-size-16 font-geo-light color-white opacity-100">Графика</a>
+                    <a href="#" class="font-size-16 font-geo-light color-white current-link">Графика</a>
                 </div>
                 <div class="navmenu-link">
                     <div class="navmenu-svg-container">
@@ -72,7 +72,7 @@
                             </defs>
                         </svg>
                     </div>
-                    <a href="#" class="font-size-16 font-geo-light color-white opacity-60">Бинды</a>
+                    <a href="#" class="font-size-16 font-geo-light color-white navmenu-link-opacity">Бинды</a>
                 </div>
                 <div class="navmenu-link">
                     <div class="navmenu-svg-container">
@@ -87,7 +87,7 @@
                             </defs>
                         </svg>
                     </div>
-                    <a href="#" class="font-size-16 font-geo-light color-white opacity-60">Инструменты</a>
+                    <a href="#" class="font-size-16 font-geo-light color-white navmenu-link-opacity">Инструменты</a>
                 </div>
             </div>
             <div class="navmenu-bottom">
@@ -104,7 +104,7 @@
                             </defs>
                         </svg>
                     </div>
-                    <a href="#" class="font-size-16 font-geo-light color-white opacity-60">Настройка</a>
+                    <a href="#" class="font-size-16 font-geo-light color-white navmenu-link-opacity">Настройка</a>
                 </div>
             </div>
         </nav>
@@ -275,13 +275,13 @@
 
             switch (value) {
                 case 0:
-                color = "#09090D"; // тёмный
+                color = "#09090D"; 
                 break;
                 case 1:
-                color = "rgba(255,255,255,0.4)"; // средний
+                color = "rgba(255,255,255,0.4)"; 
                 break;
                 case 2:
-                color = "#E54D2E"; // активный
+                color = "#E54D2E"; 
                 break;
             }
 
@@ -392,7 +392,7 @@
         .forEach(el => {
             el.classList.add('animated-gradient');
 
-            if (['preset-block-content-tab-bar-btn-active', 'preset-block-content-tab-bar-btn'].some(cls => el.classList.contains(cls))) { return; }
+            if (['preset-block-content-tab-bar-btn-active'].some(cls => el.classList.contains(cls))) { return; }
             let ticking = false;
             let last = { x: 0, y: 0, active: false };
 

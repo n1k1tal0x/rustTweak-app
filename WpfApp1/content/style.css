@@ -134,10 +134,26 @@ body, .main {
   flex-grow: 1;
   /* allow a large max-width so flex can allocate available space; prevents clipping during transition */
   max-width: 1000px;
-  opacity: 1;
+  /* opacity: 0.6; */
   pointer-events: auto;
   transform: translateX(0);
   /* no need to override transition here — initial rule covers it */
+}
+
+.navmenu .navmenu-up .navmenu-link .navmenu-link-opacity, .navmenu .navmenu-bottom .settings-block .navmenu-link-opacity {
+  opacity: 0;
+}
+
+.navmenu:hover .navmenu-up .navmenu-link .navmenu-link-opacity, .navmenu:hover .navmenu-bottom .settings-block .navmenu-link-opacity {
+  opacity: 0.6;
+}
+
+.navmenu .navmenu-up .navmenu-link .current-link, .navmenu .navmenu-bottom .settings-block .current-link {
+  opacity: 0;
+}
+
+.navmenu:hover .navmenu-up .navmenu-link .current-link, .navmenu:hover .navmenu-bottom .settings-block .current-link {
+  opacity: 1;
 }
 
 @keyframes expandWidth {
@@ -525,7 +541,10 @@ body, .main {
 }
 
 .opacity-100 {
-    opacity: 1.0;
+  opacity: 1.0;
+}
+.current-link:hover {
+  opacity: 1.0;
 }
 
 .line-height-110 {
