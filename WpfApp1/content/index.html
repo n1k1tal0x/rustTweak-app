@@ -132,19 +132,46 @@
                         </div>
                     </div>
                     <div class="preset-block-content-tab-bar">
-                        <button class="preset-block-content-tab-bar-btn preset-block-content-tab-bar-btn-active">Низкие</button>
-                        <button class="preset-block-content-tab-bar-btn" onclick="applyPreset({
-                                shadows: 1,
+                        <button class="preset-block-content-tab-bar-btn preset-block-content-tab-bar-btn-active" onclick="applyPreset({
+                                shadows: 0,
                                 textures: 0,
                                 lighting: 0,
                                 trees: 0,
                                 grass: 0,
                                 reflections_on_the_water: 0,
-                                noPresetSetting: 0,
-                                qwe:2
+                                disable_reflections:2,
+                                disable_shadow: 0
+                            })">Низкие</button>
+                        <button class="preset-block-content-tab-bar-btn" onclick="applyPreset({
+                                shadows: 1,
+                                textures: 1,
+                                lighting: 1,
+                                trees: 1,
+                                grass: 1,
+                                reflections_on_the_water: 1,
+                                disable_reflections:2,
+                                disable_shadow: 0
                             })">Средние</button>
-                        <button class="preset-block-content-tab-bar-btn">Баланс</button>
-                        <button class="preset-block-content-tab-bar-btn">Ультра</button>
+                        <button class="preset-block-content-tab-bar-btn" onclick="applyPreset({
+                                shadows: 3,
+                                textures: 3,
+                                lighting: 2,
+                                trees: 3,
+                                grass: 3,
+                                reflections_on_the_water: 3,
+                                disable_reflections:0,
+                                disable_shadow: 2
+                            })">Баланс</button>
+                        <button class="preset-block-content-tab-bar-btn" onclick="applyPreset({
+                                shadows: 4,
+                                textures: 4,
+                                lighting: 3,
+                                trees: 4,
+                                grass: 4,
+                                reflections_on_the_water: 4,
+                                disable_reflections:0,
+                                disable_shadow: 2
+                            })">Ультра</button>
                     </div>
                 </div>
                 <script>
@@ -170,9 +197,22 @@
                             checkboxRange.dispatchEvent(new Event('change', { bubbles: true }));
                             return;
                         }
-
-                        console.log('preset suffix not found:', suffix);
                     });
+
+                    const existingSuffixes = new Set();
+
+                    document.querySelectorAll('[id^="settings_slider-"]').forEach(el => {
+                        existingSuffixes.add(el.id.replace(/^settings_slider-/, ''));
+                    });
+                    document.querySelectorAll('[id^="settings_checkbox-"]').forEach(el => {
+                        existingSuffixes.add(el.id.replace(/^settings_checkbox-/, ''));
+                    });
+
+                    const missingInPreset = Array.from(existingSuffixes).filter(suffix => !(suffix in presetSettings));
+
+                    if (missingInPreset.length) {
+                        console.log('settings present in DOM but missing from presetSettings:', missingInPreset);
+                    }
                 }
                 </script>
                 <script>
@@ -277,7 +317,7 @@
                             <input type="checkbox" id="settings_checkbox-shadows_of_hidden_objects" />
                             <span class="track" aria-hidden="true"></span>
                         </label> -->
-                        <input id="settings_checkbox-disable_reflections" class="switch-range" type="range" min="0" max="2" step="1" value="1" role="switch" aria-checked="false" aria-label="Отключить отражения" />
+                        <input id="settings_checkbox-disable_shadow" class="switch-range" type="range" min="0" max="2" step="1" value="1" role="switch" aria-checked="false" aria-label="Отключить отражения" />
                     </div>
                 </div>
                 <div class="graphics-settings-block-slider-checkbox" onmouseover="{
