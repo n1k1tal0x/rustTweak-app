@@ -139,7 +139,6 @@
                                 trees: 0,
                                 grass: 0,
                                 reflections_on_the_water: 0,
-                                disable_reflections:2,
                                 disable_shadow: 0
                             })">Низкие</button>
                         <button class="preset-block-content-tab-bar-btn" onclick="applyPreset({
@@ -148,7 +147,6 @@
                                 lighting: 1,
                                 trees: 1,
                                 grass: 1,
-                                reflections_on_the_water: 1,
                                 disable_reflections:2,
                                 disable_shadow: 0
                             })">Средние</button>
@@ -170,7 +168,8 @@
                                 grass: 4,
                                 reflections_on_the_water: 4,
                                 disable_reflections:0,
-                                disable_shadow: 2
+                                disable_shadow: 2, 
+                                noPresetSetting: 4
                             })">Ультра</button>
                     </div>
                 </div>
@@ -211,31 +210,62 @@
                     const missingInPreset = Array.from(existingSuffixes).filter(suffix => !(suffix in presetSettings));
 
                     if (missingInPreset.length) {
-                        console.log('settings present in DOM but missing from presetSettings:', missingInPreset);
+                        // console.log('settings present in DOM but missing from presetSettings:', missingInPreset);
+
+                        // Выполняем разную логику в зависимости от того, к какому префиксу относится элемент
+                        missingInPreset.forEach(suffix => {
+                            const sliderId = 'settings_slider-' + suffix;
+                            const checkboxId = 'settings_checkbox-' + suffix;
+
+                            if (document.getElementById(checkboxId)) {
+                                const tmp = document.getElementById(checkboxId);
+                                tmp.value = 1;
+                                tmp.style.setProperty("--thumb-color", "rgba(255,255,255,0.4)");
+                                tmp.setAttribute("aria-checked", "true");
+                                tmp.classList.add("on");
+
+                                // уведомляем слушателей, чтобы обновился UI (цвет/статус)
+                                tmp.dispatchEvent(new Event('input', { bubbles: true }));
+                                tmp.dispatchEvent(new Event('change', { bubbles: true }));
+                            } else if (document.getElementById(sliderId)) {
+                                const tmp = document.getElementById(sliderId);
+                                tmp.value = 0;
+                                tmp.classList.add('no-preset-slider');
+                                // обновляем градиент слайдера и уведомляем слушателей
+                                if (typeof window.updateSliderGradient === 'function') {
+                                    window.updateSliderGradient(tmp);
+                                }
+                                tmp.dispatchEvent(new Event('input', { bubbles: true }));
+                                tmp.dispatchEvent(new Event('change', { bubbles: true }));
+                            } else {
+                                console.log('unknown missing setting:', suffix);
+                            }
+                        });
                     }
                 }
                 </script>
                 <script>
-                    document.getElementById('isCustomPreset').style.visibility = 'hidden';
+                document.getElementById('isCustomPreset').style.visibility = 'hidden';
                 </script>
                 <script>
                                 // ...existing code...
                 const buttons = document.querySelectorAll('.preset-block-content-tab-bar .preset-block-content-tab-bar-btn');
-                
-                buttons.forEach(btn => {
-                  btn.addEventListener('click', () => {
-                    // убрать active у всех и очистить inline background (устраняет оставшийся hover-градиент)
-                    buttons.forEach(b => {
-                      b.classList.remove('preset-block-content-tab-bar-btn-active');
-                      b.style.background = '';
+
+                    buttons.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        buttons.forEach(b => {
+                        b.classList.remove('preset-block-content-tab-bar-btn-active');
+                        b.style.background = '';
+                        // ensure non-active have hover capability
+                        if (!b.classList.contains('animated-gradient')) b.classList.add('animated-gradient');
+                        });
+
+                        // make clicked active and disable its hover effect
+                        btn.classList.add('preset-block-content-tab-bar-btn-active');
+                        btn.style.background = '';
+                        btn.classList.remove('animated-gradient');
                     });
-                
-                    // добавить active к нажатой и убедиться, что inline background очищен
-                    btn.classList.add('preset-block-content-tab-bar-btn-active');
-                    btn.style.background = '';
-                  });
-                });
-                // ...existing code...
+                    });
                 </script>
             </div>
             <div class="graphics-settings-block">
@@ -470,9 +500,9 @@
        <script>
         document.querySelectorAll('.graphics-settings-block-slider, .graphics-settings-block-slider-checkbox, .navmenu-link, .settings-block, .preset-block-content-tab-bar-btn')
         .forEach(el => {
-            el.classList.add('animated-gradient');
-
             if (['preset-block-content-tab-bar-btn-active'].some(cls => el.classList.contains(cls))) { return; }
+            
+            el.classList.add('animated-gradient');
             let ticking = false;
             let last = { x: 0, y: 0, active: false };
 
