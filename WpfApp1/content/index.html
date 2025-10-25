@@ -133,22 +133,48 @@
                     </div>
                     <div class="preset-block-content-tab-bar">
                         <button class="preset-block-content-tab-bar-btn preset-block-content-tab-bar-btn-active">Низкие</button>
-                        <button class="preset-block-content-tab-bar-btn" onclick="{
-                            const presetSettings = {
-                                shadows: 0,
+                        <button class="preset-block-content-tab-bar-btn" onclick="applyPreset({
+                                shadows: 1,
                                 textures: 0,
                                 lighting: 0,
                                 trees: 0,
                                 grass: 0,
                                 reflections_on_the_water: 0,
                                 noPresetSetting: 0,
-                            };
-                            
-                        }">Средние</button>
+                                qwe:2
+                            })">Средние</button>
                         <button class="preset-block-content-tab-bar-btn">Баланс</button>
                         <button class="preset-block-content-tab-bar-btn">Ультра</button>
                     </div>
                 </div>
+                <script>
+                function applyPreset(presetSettings) {
+                    Object.keys(presetSettings).forEach(suffix => {
+                        const sliderId = 'settings_slider-' + suffix;
+                        const checkboxId = 'settings_checkbox-' + suffix;
+
+                        const slider = document.getElementById(sliderId);
+                        if (slider) {
+                            const value = String(presetSettings[suffix]);
+                            slider.value = value;
+                            slider.dispatchEvent(new Event('input', { bubbles: true }));
+                            slider.dispatchEvent(new Event('change', { bubbles: true }));
+                            return;
+                        }
+
+                        const checkboxRange = document.getElementById(checkboxId);
+                        if (checkboxRange) {
+                            const value = String(presetSettings[suffix]);
+                            checkboxRange.value = value;
+                            checkboxRange.dispatchEvent(new Event('input', { bubbles: true }));
+                            checkboxRange.dispatchEvent(new Event('change', { bubbles: true }));
+                            return;
+                        }
+
+                        console.log('preset suffix not found:', suffix);
+                    });
+                }
+                </script>
                 <script>
                     document.getElementById('isCustomPreset').style.visibility = 'hidden';
                 </script>
